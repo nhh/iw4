@@ -4,6 +4,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss"],
   app: {
-    baseURL: '/iw4'
+    baseURL: '/iw4/'
   }
 })

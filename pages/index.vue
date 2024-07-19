@@ -1,5 +1,9 @@
 <template>
-  <div class="h-full w-full flex relative overflow-hidden">
+  <div class="h-full w-full grid place-content-center bg-gray-400 text-white font-bold text-4xl" v-if="!isRunning" @click="start">
+    <p>Start</p>
+  </div>
+
+  <div v-else class="h-full w-full flex relative overflow-hidden" @mousemove="play">
     <!-- Left side -->
     <div class="w-2/6 text-right z-10">
 
@@ -8,9 +12,9 @@
       <div class="w-full h-0.5 my-1 bg-gradient-to-l from-white"></div>
 
       <ul class="uppercase 1080p:text-3xl text-2xl font-semibold text-white flex flex-col space-y-3">
-        <li class="pr-3 align-middle">Klasseneditor</li>
-        <li class="pr-3 align-middle">Rufzeichen & Abschussserien</li>
-        <li class="pr-3 align-middle">Quartiere</li>
+        <li @mouseenter="playHoverSound" class="pr-3 align-middle">Klasseneditor</li>
+        <li @mouseenter="playHoverSound" class="pr-3 align-middle">Rufzeichen & Abschussserien</li>
+        <li @mouseenter="playHoverSound" class="pr-3 align-middle">Quartiere</li>
       </ul>
 
       <div class="w-full h-0.5 my-1 bg-gradient-to-l from-white"></div>
@@ -50,13 +54,40 @@
     <img alt="clouds" src="public/20806_smoke-clouds-png.png" class="slide h-full w-full absolute -top-100 left-0 -z-8 opacity-30 slide">
 
     <img alt="clouds" src="public/clipart-cloud-halloween-18-568848867.png" class="slide origin-center h-full w-full scale-150 rotate-30 absolute -z-8 opacity-20">
-
   </div>
 </template>
 
 <script>
+import sound from "assets/music/menu-soundtrack.mp3"
+//import hover from "assets/music/hover.mp3"
+
 export default {
-  name: "index"
+  name: "index",
+  data() {
+    return {
+      themeAudio: new Audio(sound),
+      //hoverAudio: new Audio(hover),
+      isRunning: false
+    }
+  },
+  methods: {
+    playHoverSound() {
+      //this.hoverAudio.volume = 0.10
+      //this.hoverAudio.play()
+    },
+    start() {
+      if(this.isRunning)  return
+
+      this.isRunning = true
+      this.play()
+    },
+    play() {
+      if(!this.themeAudio.paused) return
+      
+      this.themeAudio.volume = 0.10
+      this.themeAudio.play();
+    }
+  }
 }
 </script>
 

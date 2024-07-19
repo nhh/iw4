@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   target: "static",
   ssr: false,
   app: {
-    baseURL: '/iw4/'
+    baseURL: '/iw4/',
+    head: {
+      link: [{ rel: 'icon', type: 'image/png', href: "/iw4/favicon.ico" }]
+    }
   }
 })
